@@ -21,7 +21,7 @@ url: ''
 
 author: joojimin                      # change to your full name
 
-avatar: /assets/img/profile/Github_main_img.jpg   # support internet resources
+avatar: /assets/img/profile/Github_main_img.png   # support internet resources
 
 github:
   username: joojimin                    # change to your github username
@@ -72,7 +72,7 @@ disqus:
 #
 #     dark   - Use the dark color scheme
 #
-theme_mode: dual
+theme_mode: dark
 
 # boolean type, the global switch for ToC in posts.
 toc: true
