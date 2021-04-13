@@ -1,5 +1,5 @@
 ---
-title: 백기선의 리액티브 프로그래밍 1강 정리
+title: 백기선님의 리액티브 프로그래밍 1강 정리
 date: 2021-03-27 10:00:00 +0900
 categories: [Study, Reactive]
 tags: [study, reactive, java, youtube]
