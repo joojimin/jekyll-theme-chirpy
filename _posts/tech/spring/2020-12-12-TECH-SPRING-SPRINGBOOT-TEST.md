@@ -1,7 +1,7 @@
 ---
 title: SpringBoot Test
 date: 2020-12-13 17:45:00 +0900
-categories: [Tech, Java]
+categories: [Tech, Spring]
 tags: [java, tech, spring, springboot, junit, test]
 ---
 
