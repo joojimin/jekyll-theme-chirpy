@@ -180,3 +180,40 @@ public class TestClass2 {
     * Spring 로그를 보며 트랜잭션 ID를 추적해보니 같은 트랜잭션을 이용하고 있었다!!
     * 결론은 innoDB(Mysql)의 savepoint를 이용하여 중첩되는 순간을 스냅샷으로 찍어두고, <br>
     해당 중첩이 롤백되면 savepoint로 rollback시켜 트랜잭션 전체에 영향을 미치지 않게 하는 방식이였다!!
+
+
+#### 두번째 상황
+
+* 설명
+    * 앞서 Nested 옵션을 통해 Propagation을 살펴보았다. 
+    * 그럼 같은 클래스 내의 다른 메소드를 호출시키며 이들의 트랜잭션 전파 레벨이 다르다면 적용이 될까?
+    * 결론 Proxy 동작 방식에 의해 적용되지 않는다.
+
+```java
+public class TestClass1 {
+
+    @Transactional
+    public void test1() {
+        try {
+            test2();
+        } catch (RuntimeException ex) {
+            // do something
+        } finally {
+            // do something
+        }
+    }
+    
+    @Transactional(propagation = Propagation.NESTED)
+    public void test2() {
+        throw new RuntimeException();
+    }    
+}
+```
+
+* 원인 분석
+    * 위 코드는 첫 번째 상황과 전혀 다르게 움직인다.
+    * 결론은 test2는 롤백되지 않고 전부 commit된다.
+    * 스프링은 Bean을 생성할때 @Transactional 어노테이션을 보고 미리 Proxy 객체를 만들어 놓는다.
+    * 외부에서 test1을 호출할때 미리 만들어 놓은 Proxy 객체를 실행시키고 해당 객체에서 방출되는 런타임 에러를 통해, <br>
+    롤백 여부를 판단하게 되는데, 중요한 건 해당 객체를 실행하는 invoke의 메소드 내부의 동작은 모른다는 것이다.
+    * 즉 test1의 trasactional 옵션만 보고 proxy를 동작시키고, 리플랙션을 이용해 그 안에서 실행되는 test2의 옵션은 전혀 알 수가 없다.
