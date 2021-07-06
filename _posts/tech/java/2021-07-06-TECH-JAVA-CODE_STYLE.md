@@ -12,7 +12,7 @@ tags: [java, tech, convention]
 ## google code style guide ( intellJ 기준 )
 
 * [https://google.github.io/styleguide/javaguide.html](https://google.github.io/styleguide/javaguide.html)
-* 첨부파일 다운로드(아래 링크에서 다운받으셔도 됩니다 )
+* xml 다운로드(아래 링크에서 다운)<br>
   [https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml](https://github.com/google/styleguide/blob/gh-pages/intellij-java-google-style.xml)
 
 ## intelliJ 설정
